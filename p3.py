@@ -11,8 +11,8 @@ nnfs.init()
 
 # LOADING IN THE DATA
 # ==============================================
-total = 12000000
-spirals = 4
+total = 3000
+spirals = 3
 X, y = spiral_data(total//spirals, spirals)
 
 # shuffling the data
@@ -24,14 +24,15 @@ X, y = zip(*temp)
 X = np.array(list(X))
 y = np.array(list(y))
 
-colors = {0:'r', 1:'g', 2:'b', 3:'magenta'}
+colors = {0:'r', 1:'g', 2:'b'}
 
 # Show the spirals
-# for i in range(len(y)):
-#     plt.plot(X[i][0], X[i][1], 'o', color = colors[y[i]])
+for i in range(len(y)):
+    plt.plot(X[i][0], X[i][1], 'o', color = colors[y[i]])
 
-# plt.show()
+plt.show()
 
+exit()
 
 # ACTIVATION FUNCTIONS
 # ==============================================
@@ -57,7 +58,7 @@ def softmax_derivative(calculated_output, expected_output):
 batch_size = 10
 
 neurons = 200
-op_neurons = 4
+op_neurons = 3
 w1 = np.random.randn(2, neurons) * 0.1
 b1 = np.zeros((1, neurons))
 w2 = np.random.randn(neurons, op_neurons) * 0.1

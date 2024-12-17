@@ -19,7 +19,7 @@ def softmax(z):
     return exp_z / np.sum(exp_z, axis=1, keepdims=True)
 
 
-a0 = np.array([[-0.413, 0.141]])
+a0 = np.array([[0.217, 0]])
 
 z1 = np.dot(a0, w1) + b1
 a1 = relu(z1)
