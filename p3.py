@@ -12,7 +12,7 @@ nnfs.init()
 # LOADING IN THE DATA
 # ==============================================
 total = 3000
-spirals = 3
+spirals = 4
 X, y = spiral_data(total//spirals, spirals)
 
 # shuffling the data
@@ -24,7 +24,7 @@ X, y = zip(*temp)
 X = np.array(list(X))
 y = np.array(list(y))
 
-colors = {0:'r', 1:'g', 2:'b'}
+colors = {0:'r', 1:'g', 2:'b', 3:'yellow'}
 
 # Show the spirals
 for i in range(len(y)):
