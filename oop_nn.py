@@ -162,7 +162,7 @@ class Neural_Network:
 # INITIAL PARAMETERS
 # ================================================================
 total = 1200000
-spirals = 4
+spirals = 5
 X, y = spiral_data(total//spirals, spirals)
 
 # randomizing the order of X, y
@@ -173,7 +173,7 @@ X, y = zip(*temp)
 X = np.array(list(X))
 y = np.array(list(y))
 
-colors = {0: 'r', 1: 'g', 2: 'b', 3: 'purple'}
+colors = {0: 'r', 1: 'g', 2: 'b', 3: 'yellow', 4: 'black'}
 
 nn = Neural_Network([2, 100, 100, spirals], [Activation_ReLU, Activation_ReLU, Activation_Softmax])
 

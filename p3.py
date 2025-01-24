@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import nnfs
 from nnfs.datasets import spiral_data
+from nnfs.datasets import sine
 import random
 
 import json
@@ -12,8 +13,9 @@ nnfs.init()
 # LOADING IN THE DATA
 # ==============================================
 total = 3000
-spirals = 4
+spirals = 3
 X, y = spiral_data(total//spirals, spirals)
+# X2, y2 = sine.create_data(total//spirals)
 
 # shuffling the data
 random.seed(13)
@@ -24,11 +26,14 @@ X, y = zip(*temp)
 X = np.array(list(X))
 y = np.array(list(y))
 
-colors = {0:'r', 1:'g', 2:'b', 3:'yellow'}
+colors = {0:'r', 1:'g', 2:'b', 3:'yellow', 4:'black'}
 
 # Show the spirals
 for i in range(len(y)):
     plt.plot(X[i][0], X[i][1], 'o', color = colors[y[i]])
+
+# for i in range(len(y2)):
+#     plt.plot(X2[i][0], X[i][1], 'o', color = colors[y[i]])
 
 plt.show()
 
@@ -72,7 +77,7 @@ overall_average_losses = [0]
 for batch in range(total // batch_size):
     inputs = X[batch * batch_size:(batch + 1) * batch_size]
     targets = y[batch * batch_size:(batch + 1) * batch_size]
-    
+
     a0 = inputs
     z1 = np.dot(a0, w1) + b1
     a1 = relu(z1)
@@ -83,16 +88,16 @@ for batch in range(total // batch_size):
     # modifying and reducing the least count value to make sure the gradient reduces as it reaches the minima
     if batch == total // (2*batch_size) or batch == total // (4*batch_size) or batch == total // (8*batch_size):
         least_count *= 0.1
-    
-    
+
+
     cost_grad = [np.zeros_like(w2), np.zeros_like(w1), np.zeros_like(b2), np.zeros_like(b1)]
     losses = []
-    
+
     for i in range(batch_size):
         calculated_output = a2[i]
         expected_output = targets[i]
 
-        # calculating loss (mean squared error) mse 
+        # calculating loss (mean squared error) mse
         # here np.arrange(4) = [0, 1, 2, 3]
         # when we do np.arrange(4) == 2, it gives the output as [False, False, True, False], basically one hot encoding the output
         loss = ((calculated_output - (np.arange(op_neurons) == expected_output))**2).sum()
@@ -114,7 +119,7 @@ for batch in range(total // batch_size):
         dc_dw1 = np.outer(a0[i], node_values)
         dc_db1 = node_values
 
-        
+
         # summing all the costs
         cost_grad[0] += dc_dw2
         cost_grad[1] += dc_dw1
@@ -131,7 +136,7 @@ for batch in range(total // batch_size):
     overall_average_losses.append(average_loss)
 
 
-# SAVING THE PARAMETERS AFTER CALCULATIONS FOR LATER USE 
+# SAVING THE PARAMETERS AFTER CALCULATIONS FOR LATER USE
 # ==============================================
 f = open('params.json', 'w')
 json.dump([w1.tolist(), b1.tolist(), w2.tolist(), b2.tolist()], f)
