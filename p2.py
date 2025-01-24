@@ -189,10 +189,12 @@ y = np.array(list(y))
 
 colors = {0: 'r', 1:'g', 2:'b'}
 
-# for i in range(len(y)):
-#     plt.plot(X[i][0], X[i][1], 'o', color = colors[y[i]])
-#
-# plt.show()
+for i in range(len(y)):
+    plt.plot(X[i][0], X[i][1], 'o', color = colors[y[i]])
+
+plt.show()
+
+exit()
 
 nn = Neural_Network([2, 10, 3], [Activation_ReLU, Activation_Sigmoid])
 costs = []
