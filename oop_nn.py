@@ -212,6 +212,7 @@ for i in range(len(y)):
 
 plt.show()
 
+# TAKING AN INPUT FOR CHECKING THE OUTPUT
 input_test_point = eval(input('Enter a point: '))
 nn.forward(np.array([input_test_point]))
 print(nn.output)
